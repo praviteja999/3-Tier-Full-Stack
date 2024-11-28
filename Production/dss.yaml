@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: yelp-camp-container
-          image: kanha05/campground:8
+          image: kanha05/campground:9
           ports:
             - containerPort: 3000
           env:
@@ -41,27 +41,27 @@ spec:
             - name: CLOUDINARY_KEY
               valueFrom:
                 secretKeyRef:
-                  name: yelp-camp-ground
+                  name: yelp-camp-secrets
                   key: CLOUDINARY_KEY
             - name: CLOUDINARY_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: yelp-camp-ground
+                  name: yelp-camp-secrets
                   key: CLOUDINARY_SECRET
             - name: MAPBOX_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: yelp-camp-ground
+                  name: yelp-camp-secrets
                   key: MAPBOX_TOKEN
             - name: DB_URL
               valueFrom:
                 secretKeyRef:
-                  name: yelp-camp-ground
+                  name: yelp-camp-secrets
                   key: DB_URL
             - name: SECRET
               valueFrom:
                 secretKeyRef:
-                  name: yelp-camp-ground
+                  name: yelp-camp-secrets
                   key: SECRET
           livenessProbe:
             httpGet:
