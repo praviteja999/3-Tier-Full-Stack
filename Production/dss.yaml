@@ -9,7 +9,7 @@ data:
   CLOUDINARY_KEY: NzIxNTg5Mzk4NjY5MjU2
   CLOUDINARY_SECRET: WWIweVpRTmFSbk5GQURUNGxhdkF6VlFVZ19J
   MAPBOX_TOKEN: cGsuZXlKMUlqb2lhR0Z5YzJnd01EVWlMQ0poSWpvaVkyMDBNV2hsTUhWcE1tRTVjVEpzYzJONGRtRnRlREYxTmlKOS5TMl9lX0hLMTFJeE1yd21JQ1FpR1Fn
-  DB_URL: bW9uZ29kYitzcnY6Ly88ZGJfdXNlcm5hbWU+OjxkYl9wYXNzd29yZD5AMy10aWVyLWRlcGxveW1lbnQua2d1amgubW9uZ29kYi5uZXQvP3JldHJ5V3JpdGVzPXRydWUmdz1tYWpvcml0eSZhcHBOYW1lPTMtVGllci1EZXBsb3ltZW50
+  DB_URL: bW9uZ29kYitzcnY6Ly9oYXJzaGhnMjAwNTpoYXJzaDEyM0AzLXRpZXItZGVwbG95bWVudC5rZ3VqaC5tb25nb2RiLm5ldC8/cmV0cnlXcml0ZXM9dHJ1ZSZ3PW1ham9yaXR5JmFwcE5hbWU9My1UaWVyLURlcGxveW1lbnQ=
   SECRET: SGFyc2gK
 
 ---
@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: yelp-camp-container
-          image: kanha05/campground:12
+          image: kanha05/campground:13
           ports:
             - containerPort: 3000
           env:
