@@ -41,27 +41,27 @@ spec:
             - name: CLOUDINARY_KEY
               valueFrom:
                 secretKeyRef:
-                  name: yelp-camp-secrets
+                  name: yelp-camp-ground
                   key: CLOUDINARY_KEY
             - name: CLOUDINARY_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: yelp-camp-secrets
+                  name: yelp-camp-ground
                   key: CLOUDINARY_SECRET
             - name: MAPBOX_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: yelp-camp-secrets
+                  name: yelp-camp-ground
                   key: MAPBOX_TOKEN
             - name: DB_URL
               valueFrom:
                 secretKeyRef:
-                  name: yelp-camp-secrets
+                  name: yelp-camp-ground
                   key: DB_URL
             - name: SECRET
               valueFrom:
                 secretKeyRef:
-                  name: yelp-camp-secrets
+                  name: yelp-camp-ground
                   key: SECRET
           livenessProbe:
             httpGet:
