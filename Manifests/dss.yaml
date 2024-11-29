@@ -5,12 +5,12 @@ metadata:
   name: yelp-camp-ground
 type: Opaque
 data:
-  CLOUDINARY_CLOUD_NAME: ZG9hdGJubDlv
-  CLOUDINARY_KEY: NzIxNTg5Mzk4NjY5MjU2
-  CLOUDINARY_SECRET: WWIweVpRTmFSbk5GQURUNGxhdkF6VlFVZ19J
-  MAPBOX_TOKEN: cGsuZXlKMUlqb2lhR0Z5YzJnd01EVWlMQ0poSWpvaVkyMDBNV2hsTUhWcE1tRTVjVEpzYzJONGRtRnRlREYxTmlKOS5TMl9lX0hLMTFJeE1yd21JQ1FpR1Fn
-  DB_URL: bW9uZ29kYitzcnY6Ly9oYXJzaGhnMjAwNTpoYXJzaDEyM0AzLXRpZXItZGVwbG95bWVudC5rZ3VqaC5tb25nb2RiLm5ldC8/cmV0cnlXcml0ZXM9dHJ1ZSZ3PW1ham9yaXR5JmFwcE5hbWU9My1UaWVyLURlcGxveW1lbnQ=
-  SECRET: SGFyc2gK
+  CLOUDINARY_CLOUD_NAME: <encoded-value>
+  CLOUDINARY_KEY: <encoded-value>
+  CLOUDINARY_SECRET: <encoded-value>
+  MAPBOX_TOKEN: <encoded-value>
+  DB_URL: <encoded-value>
+  SECRET: <encoded-value>
 
 ---
 apiVersion: apps/v1
