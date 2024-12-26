@@ -12,7 +12,7 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
-  cluster_name = "education-eks-${random_string.suffix.result}"
+  cluster_name = "eks-${random_string.suffix.result}"
 }
 
 resource "random_string" "suffix" {
@@ -24,7 +24,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.8.1"
 
-  name = "education-vpc"
+  name = "vpc"
 
   cidr = "10.0.0.0/16"
   azs  = slice(data.aws_availability_zones.available.names, 0, 3)
@@ -56,17 +56,35 @@ module "eks" {
   enable_cluster_creator_admin_permissions = true
 
   cluster_addons = {
-    aws-ebs-csi-driver = {
-      service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
-    }
+  /*coredns = {
+    most_recent = true
   }
+  kube-proxy = {
+    most_recent = true
+  }
+  vpc-cni = {
+    most_recent = true
+  }*/
+  ebs-csi = {
+    most_recent = true
+  }
+  /*eks-pod-identity = {
+    most_recent = true
+  }*/
+  amazon-vpc-cni = {
+    most_recent = true
+  }
+  /*csi-snapshot-controller = {
+    most_recent = true
+  }*/
+}
+
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
-
   }
 
   eks_managed_node_groups = {
@@ -92,8 +110,7 @@ module "eks" {
   }
 }
 
-
-# https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/
+# IAM Role for Amazon EBS CSI Driver
 data "aws_iam_policy" "ebs_csi_policy" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
 }
