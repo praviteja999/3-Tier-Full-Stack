@@ -1,0 +1,92 @@
+pipeline {
+    agent any
+    
+    tools {
+        nodejs 'nodejs'
+    }
+    
+    environment {
+        SONAR_HOME = tool 'sonar-scanner'
+    }
+    
+    stages {
+        stage("Git CheckOut") {
+            steps {
+                git branch: 'main', url: 'https://github.com/praviteja999/3-Tier-Full-Stack.git'
+            }
+        }
+        
+        stage("Dependencies Installation") {
+            steps {
+                sh 'npm install'
+            }
+        }
+        
+        stage("Unit Test") {
+            steps {
+                sh 'npm test'
+            }
+        }
+        
+        stage("Trivy FS Scan") {
+            steps {
+                sh 'trivy fs --format table -o report.html .'
+            }
+        }
+        
+        stage("SonarQube") {
+            steps {
+                withSonarQubeEnv("sonar-server") {
+                    sh '$SONAR_HOME/bin/sonar-scanner -Dsonar.projectKey=campground -Dsonar.projectName=campground'
+                }
+            }
+        }
+        
+        stage("Docker Build & Tag") {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh 'docker build -t sriram8788/campground:$BUILD_NUMBER .'
+                    }
+                }
+            }
+        }
+        
+        stage("Trivy Image Scan") {
+            steps {
+                sh 'trivy image --format table -o report.html sriram8788/campground:$BUILD_NUMBER'
+            }
+        }
+        
+        stage("Docker Push") {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh 'docker push sriram8788/campground:$BUILD_NUMBER'
+                    }
+                }
+            }
+        }
+        
+        stage('Upload Deployment File') {
+            environment {
+                GIT_REPO_NAME = "3-Tier-Full-Stack"
+                GIT_USER_NAME = "praviteja999"
+            }
+            steps {
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                    sh '''
+                        git config user.email "praviteja999@protonmail.com"
+                        git config user.name "praviteja999"
+                        BUILD_NUMBER=${BUILD_NUMBER}
+                        cp Manifests/deployment.yaml Production/
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Production/deployment.yaml
+                        git add Production/
+                        git commit -m "Update Deployment Manifest for Production"
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                    '''
+                }
+            }
+        }
+    }
+}
