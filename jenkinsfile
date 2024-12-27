@@ -10,6 +10,12 @@ pipeline {
     }
     
     stages {
+        stage('Cleaning Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+        
         stage("Git CheckOut") {
             steps {
                 git branch: 'main', url: 'https://github.com/praviteja999/3-Tier-Full-Stack.git'
