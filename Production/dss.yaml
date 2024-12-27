@@ -5,12 +5,12 @@ metadata:
   name: yelp-camp-ground
 type: Opaque
 data:
-  CLOUDINARY_CLOUD_NAME: 
-  CLOUDINARY_KEY: 
-  CLOUDINARY_SECRET: 
-  MAPBOX_TOKEN: 
-  DB_URL: 
-  SECRET: 
+  CLOUDINARY_CLOUD_NAME: <encoded-value>
+  CLOUDINARY_KEY: <encoded-value>
+  CLOUDINARY_SECRET: <encoded-value>
+  MAPBOX_TOKEN: <encoded-value>
+  DB_URL: <encoded-value>
+  SECRET: <encoded-value>
 
 ---
 apiVersion: apps/v1
@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: yelp-camp-container
-          image: kanha05/campground:13
+          image: kanha05/campground:7
           ports:
             - containerPort: 3000
           env:
