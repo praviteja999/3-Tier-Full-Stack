@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: yelp-camp-container
-          image: kanha05/campground:replaceImageTag
+          image: sriram8788/campground:replaceImageTag
           ports:
             - containerPort: 3000
           env:
