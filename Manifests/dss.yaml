@@ -1,17 +1,16 @@
----
 apiVersion: v1
 kind: Secret
 metadata:
   name: yelp-camp-ground
+  namespace: three-tier
 type: Opaque
 data:
-  CLOUDINARY_CLOUD_NAME: <encoded-value>
-  CLOUDINARY_KEY: <encoded-value>
-  CLOUDINARY_SECRET: <encoded-value>
-  MAPBOX_TOKEN: <encoded-value>
-  DB_URL: <encoded-value>
-  SECRET: <encoded-value>
-
+  CLOUDINARY_CLOUD_NAME: ZGJobWlkZm9k
+  CLOUDINARY_KEY: NjcxNDI0Nzc5ODQyODI0
+  CLOUDINARY_SECRET: cG1WYVNYOFJtck0tdnYtVVJ1d2tRdHI4MmR3
+  MAPBOX_TOKEN: cGsuZXlKMUlqb2lZMmhoYm1GcmVXRTVNVEVpTENKaElqb2lZMjAxTm1Oa2FHa3dNekp2ZHpKcGMyWnFjWEF4YzJaNk9DSjkuRE5kTGZlUGZoYXU1bm41RXpIT1REUQ==
+  DB_URL: bW9uZ29kYitzcnY6Ly9yYXZpdGVqYTpkYXRhMTIzQDMtdGllci1kZXBsb3ltZW50LmZ4cnJlLm1vbmdvZGIubmV0Lz9yZXRyeVdyaXRlcz10cnVlJnc9bWFqb3JpdHkmYXBwTmFtZT0zLVRpZXItRGVwbG95bWVudA==
+  SECRET: cmF2aXRlamE=
 ---
 apiVersion: apps/v1
 kind: Deployment
