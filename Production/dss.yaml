@@ -9,7 +9,7 @@ data:
   CLOUDINARY_KEY: NjcxNDI0Nzc5ODQyODI0
   CLOUDINARY_SECRET: cG1WYVNYOFJtck0tdnYtVVJ1d2tRdHI4MmR3
   MAPBOX_TOKEN: cGsuZXlKMUlqb2lZMmhoYm1GcmVXRTVNVEVpTENKaElqb2lZMjAxTm1Oa2FHa3dNekp2ZHpKcGMyWnFjWEF4YzJaNk9DSjkuRE5kTGZlUGZoYXU1bm41RXpIT1REUQ==
-  DB_URL: J21vbmdvZGIrc3J2Oi8vcmF2aXRlamE6ZGF0YTEyM0AzLXRpZXItZGVwbG95bWVudC5meHJyZS5tb25nb2RiLm5ldC8/cmV0cnlXcml0ZXM9dHJ1ZSZ3PW1ham9yaXR5JmFwcE5hbWU9My1UaWVyLURlcGxveW1lbnQn
+  DB_URL: bW9uZ29kYitzcnY6Ly9yYXZpdGVqYTpkYXRhMTIzQDMtdGllci1kZXBsb3ltZW50LmZ4cnJlLm1vbmdvZGIubmV0Lz9yZXRyeVdyaXRlcz10cnVlJnc9bWFqb3JpdHkmYXBwTmFtZT0zLVRpZXItRGVwbG95bWVudA==
   SECRET: cmF2aXRlamE=
 
 ---
@@ -17,6 +17,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: yelp-camp-deployment
+  namespace: three-tier
 spec:
   replicas: 1
   selector:
@@ -31,7 +32,7 @@ spec:
         - name: yelp-camp-container
           image: sriram8788/campground:10
           ports:
-            - containerPort: 3000
+            - containerPort: 3500
           env:
             - name: CLOUDINARY_CLOUD_NAME
               valueFrom:
@@ -63,27 +64,18 @@ spec:
                 secretKeyRef:
                   name: yelp-camp-ground
                   key: SECRET
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 3000
-            initialDelaySeconds: 30   # Adjust the initial delay here
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 3000
-            initialDelaySeconds: 30   # Adjust the initial delay here
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: yelp-camp-service
+  namespace: three-tier
 spec:
   selector:
     app: yelp-camp
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 3500
+      targetPort: 3500
   type: LoadBalancer
