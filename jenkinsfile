@@ -52,6 +52,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh 'docker image prune -af'
                         sh 'docker build -t sriram8788/campground:$BUILD_NUMBER .'
                     }
                 }
